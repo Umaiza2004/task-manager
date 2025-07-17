@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Smart Task Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <button id="theme-switcher">
+            <i class="fas fa-moon"></i>
+            <i class="fas fa-sun" style="display: none;"></i>
+        </button>
+         <div id="notification-container">
+            <i id="notification-bell" class="fas fa-bell">
+                <span id="notification-badge">0</span>
+            </i>
+        </div>
+        <header class="app-header">
+            <h1><i class="fas fa-tasks"></i> TaskFlow</h1>
+            <p>Your productivity companion</p>
+            <!--<div class="notification-bell" id="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge" id="notification-badge">0</span>
+            </div>-->
+        </header>
+
+        <div class="app-container">
+            <div class="sidebar">
+                <div class="stats-card">
+                    <h3>Task Stats</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Total:</span>
+                        <span class="stat-value" id="total-tasks">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Completed:</span>
+                        <span class="stat-value" id="completed-tasks">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Pending:</span>
+                        <span class="stat-value" id="pending-tasks">0</span>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <h3>Filter Tasks</h3>
+                    <div class="filter-options">
+                        <button class="filter-btn active" data-filter="all">All Tasks</button>
+                        <button class="filter-btn" data-filter="completed">Completed</button>
+                        <button class="filter-btn" data-filter="pending">Pending</button>
+                        <button class="filter-btn" data-filter="urgent">Urgent</button>
+                    </div>
+                </div>
+
+                <div class="reminder-section">
+                    <h3>Upcoming Deadlines</h3>
+                    <div id="reminder-list"></div>
+                </div>
+            </div>
+
+            <main class="main-content">
+                <div class="task-form-container">
+                    <form id="task-form">
+                        <h2><i class="fas fa-plus-circle"></i> Add New Task</h2>
+                        <div class="form-group">
+                            <label for="task-title">Task Title</label>
+                            <input type="text" id="task-title" placeholder="Enter task title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="task-description">Description</label>
+                            <textarea id="task-description" placeholder="Enter task description"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="task-date">Due Date</label>
+                                <input type="datetime-local" id="task-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="task-priority">Priority</label>
+                                <select id="task-priority">
+                                    <option value="low">Low</option>
+                                    <option value="medium" selected>Medium</option>
+                                    <option value="high">High</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Add Task <i class="fas fa-plus"></i></button>
+                    </form>
+                </div>
+
+                <div class="task-list-container">
+                    <div class="task-list-header">
+                        <h2><i class="fas fa-list-check"></i> Your Tasks</h2>
+                        <div class="search-box">
+                            <input type="text" id="task-search" placeholder="Search tasks...">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div id="task-list"></div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit Task Modal -->
+    <div id="edit-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Edit Task</h2>
+            <form id="edit-form">
+                <input type="hidden" id="edit-id">
+                <div class="form-group">
+                    <label for="edit-title">Task Title</label>
+                    <input type="text" id="edit-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-description">Description</label>
+                    <textarea id="edit-description"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="edit-date">Due Date</label>
+                        <input type="datetime-local" id="edit-date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edit-priority">Priority</label>
+                        <select id="edit-priority">
+                            <option value="low">Low</option>
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="edit-completed"> Mark as completed
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn">Save Changes <i class="fas fa-save"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <div id="notification-toast" class="notification-toast">
+        <div class="toast-content">
+            <i class="fas" id="toast-icon"></i>
+            <span id="toast-message"></span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
